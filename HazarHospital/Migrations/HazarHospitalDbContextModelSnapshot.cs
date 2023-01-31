@@ -58,6 +58,9 @@ namespace HazarHospital.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("AppointmentConfirmationNumber")
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("datetime(6)");
 
@@ -75,15 +78,19 @@ namespace HazarHospital.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("DoctorComment")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("IsDriving")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int?>("MedicalRecordId")
                         .HasColumnType("int");
@@ -115,9 +122,6 @@ namespace HazarHospital.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("AdminId")
                         .HasColumnType("int");
 
                     b.Property<string>("DoctorCode")
@@ -153,8 +157,6 @@ namespace HazarHospital.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AdminId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -206,9 +208,6 @@ namespace HazarHospital.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("AdminId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime(6)");
 
@@ -239,8 +238,6 @@ namespace HazarHospital.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AdminId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -337,19 +334,11 @@ namespace HazarHospital.Migrations
 
             modelBuilder.Entity("HazarHospital.Entities.Doctor", b =>
                 {
-                    b.HasOne("HazarHospital.Entities.Admin", "Admin")
-                        .WithMany("Doctors")
-                        .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HazarHospital.Entities.User", "User")
                         .WithOne("Doctor")
                         .HasForeignKey("HazarHospital.Entities.Doctor", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Admin");
 
                     b.Navigation("User");
                 });
@@ -367,19 +356,11 @@ namespace HazarHospital.Migrations
 
             modelBuilder.Entity("HazarHospital.Entities.Patient", b =>
                 {
-                    b.HasOne("HazarHospital.Entities.Admin", "Admin")
-                        .WithMany("Patients")
-                        .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HazarHospital.Entities.User", "User")
                         .WithOne("Patient")
                         .HasForeignKey("HazarHospital.Entities.Patient", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Admin");
 
                     b.Navigation("User");
                 });
@@ -393,13 +374,6 @@ namespace HazarHospital.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("HazarHospital.Entities.Admin", b =>
-                {
-                    b.Navigation("Doctors");
-
-                    b.Navigation("Patients");
                 });
 
             modelBuilder.Entity("HazarHospital.Entities.Doctor", b =>

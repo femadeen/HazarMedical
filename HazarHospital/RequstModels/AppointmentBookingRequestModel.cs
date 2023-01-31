@@ -2,9 +2,10 @@
 {
     public class AppointmentBookingRequestModel
     {
-        public int PatientId { get; set; }
-        public string PatientCode { get; set; }
-        public string UnitFacility { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string unitFacility { get; set; }
         public bool IsDriving { get; set; }
         public DateTime AppointmentTime { get; set; }
         public string ReasonForAppointment { get; set; }

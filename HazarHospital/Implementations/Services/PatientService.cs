@@ -45,8 +45,8 @@ namespace HazarHospital.Implementations.Services
                     Message = "Sorry! User already exist"
                 };
             }
-            var patientExist = await _patientRepository.FindpatientByEmail(model.Email);
-            if(patientExist != null)
+            var patientExist = await _patientRepository.Exist(model.Email);
+            if(patientExist)
             {
                 return new BaseResponse
                 {
@@ -70,7 +70,7 @@ namespace HazarHospital.Implementations.Services
                 LastName = model.LastName,
                 Email = model.Email,
                 DateOfBirth = model.DateOfBirth,
-                PatientAddress = model.PatientAdresss,
+                PatientAddress = model.PatientAddress,
                 PhoneNumber = model.PhoneNumber,
                 User = user,
                 UserId = user.Id,

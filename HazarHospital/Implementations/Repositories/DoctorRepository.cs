@@ -26,9 +26,9 @@ namespace HazarHospital.Implementations.Repositories
             return true;
         }
 
-        public async Task<Doctor> Exist(string email)
+        public async Task<bool> Exist(string email)
         {
-            var doctor = await _context.Doctors.FirstOrDefaultAsync(d => d.Email.ToLower() == email.ToLower());
+            var doctor = await _context.Doctors.AnyAsync(d => d.Email.ToLower() == email.ToLower());
             return doctor;
         }
 

@@ -8,7 +8,7 @@ namespace HazarHospital.Interfaces.Repositories
         Task<User> FindUserById(int id);
         Task<User> FindUserByEmail(string email);
         Task<User> UpdateUser(User user);
-        public List<User> GetAllUsers();
+        Task <List<User>> GetAllUsers();
         Task<bool>DeleteUser(User user);
     }
 }

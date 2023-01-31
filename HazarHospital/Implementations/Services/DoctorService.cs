@@ -14,15 +14,12 @@ namespace HazarHospital.Implementations.Services
         private readonly IDoctorRepository _doctorRepository;
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
-        private readonly IAppointmentRepository _appointmentRepository;
-        private readonly IPatientRepository _patientRepository;
+      
         public DoctorService(IDoctorRepository doctorRepository, IUserRepository userRepository, IRoleRepository roleRepository, IAppointmentRepository appointmentRepository, IPatientRepository patientRepository)
         {
             _doctorRepository = doctorRepository;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
-            _appointmentRepository = appointmentRepository;
-            _patientRepository = patientRepository;
         }
 
         public Task<BaseResponse> AdmitPatient(int appointmentId)
@@ -74,8 +71,8 @@ namespace HazarHospital.Implementations.Services
                     Message = "User already exist"
                 };
             }
-            var doctorExist = await _doctorRepository.FindDoctorByEmail(model.Email);
-            if (doctorExist != null)
+            var doctorExist = await _doctorRepository.Exist(model.Email);
+            if (doctorExist)
             {
                 return new BaseResponse
                 {
@@ -84,16 +81,8 @@ namespace HazarHospital.Implementations.Services
                 };
             }
             var role = await _roleRepository.FindRoleByName("Doctor");
-            if(role == null)
-            {
-                return new BaseResponse
-                {
-                    Status = false,
-                    Message = "No such Role found"
-                };
-            }
             var salt = Guid.NewGuid().ToString();
-            var hashpassword = BCrypt.Net.BCrypt.HashPassword($"{model.Password}{salt}");
+            var hashpassword = BCrypt.Net.BCrypt.HashPassword($"{model.Password}");
             var user = new User
             {
                 Email = model.Email,

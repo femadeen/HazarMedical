@@ -4,8 +4,11 @@ namespace HazarHospital.Entities
 {
     public class Appointment
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public int Id { get; set; }
         public string AppointmentReferenceNumber { get; set; }
+        public string? AppointmentConfirmationNumber { get; set; }
         public string AppointmentReason { get; set; }
         public DateTime AppointmentDuration { get; set; }
         public bool IsDriving { get; set; }
@@ -18,6 +21,5 @@ namespace HazarHospital.Entities
         public DateTime DateCreated { get; set; }
         public AppointmentStatus Status { get; set; }
         public int? DoctorId { get; set; }
-        public string DoctorComment { get; set; }
     }
 }

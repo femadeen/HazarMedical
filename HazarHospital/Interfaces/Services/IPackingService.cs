@@ -1,4 +1,5 @@
 ﻿using HazarHospital.Models;
+using HazarHospital.RequstModels;
 using HazarHospital.ResponseModels;
 
 namespace HazarHospital.Interfaces.Services
@@ -9,5 +10,6 @@ namespace HazarHospital.Interfaces.Services
         Task<PackingsResponseModel> GetAllAvailablePackingSpace();
         Task<BaseResponse> UnassignedPackingSpace(int appointmentId);
         Task<PackingResponseModel> GetPackingSpaceByAppointment(int aapoitmentId);
+        Task<PackingResponseModel> CreatePackingSpace();
     }
 }

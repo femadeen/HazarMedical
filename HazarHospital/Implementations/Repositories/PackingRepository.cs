@@ -1,6 +1,7 @@
 ﻿using HazarHospital.Entities;
 using HazarHospital.HospitalContext;
 using HazarHospital.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace HazarHospital.Implementations.Repositories
 {
@@ -12,44 +13,55 @@ namespace HazarHospital.Implementations.Repositories
             _context = context;
         }
 
-        public Task<Packing> CreatePackingSpace(Packing packing)
+        public async Task<Packing> CreatePackingSpace(Packing packing)
         {
-            throw new NotImplementedException();
+            _context.Packings.Add(packing);
+            _context.SaveChanges();
+            return packing;
         }
 
-        public Task<List<Packing>> GetAllPAcking()
+        public async Task<List<Packing>> GetAllPAcking()
         {
-            throw new NotImplementedException();
+            var parkings = await _context.Packings.ToListAsync();
+            return parkings;
         }
 
-        public Task<List<Packing>> GetAvailablePAckingSpace()
+        public async Task<List<Packing>> GetAvailablePAckingSpace()
         {
-            throw new NotImplementedException();
+            var availablePackings = await _context.Packings.Where(p => p.IsAssigned == false).ToListAsync();
+            return availablePackings;
         }
 
-        public Task<Packing> GetFirstAvailablePAckingSpace()
+        public async Task<Packing> GetFirstAvailablePAckingSpace()
         {
-            throw new NotImplementedException();
+            var availableparking = await _context.Packings.Where(p => p.IsAssigned == false).FirstOrDefaultAsync();
+            return availableparking;
         }
 
-        public Task<Packing> GetPackingByPackingNumber(int packingNumber)
+        public async Task<Packing> GetPackingByPackingNumber(string  packingNumber)
         {
-            throw new NotImplementedException();
+            var packing = await _context.Packings.SingleOrDefaultAsync(p => p.PackingNo == packingNumber);
+            return packing;
         }
 
-        public Task<Packing> GetPackingSpace(int packingId)
+        public async  Task<Packing> GetPackingSpace(int packingId)
         {
-            throw new NotImplementedException();
+            var packingSpace = await _context.Packings.SingleOrDefaultAsync(p => p.Id == packingId);
+            return packingSpace;
         }
 
-        public void RemovePacking(Packing packing)
+        public async Task<bool> RemovePacking(Packing packing)
         {
-            throw new NotImplementedException();
+            var PackingToDelete = _context.Packings.Remove(packing);
+            _context.SaveChanges();
+            return true;
         }
 
-        public Task<Packing> UpdatePacking(Packing packing)
+        public async Task<Packing> UpdatePacking(Packing packing)
         {
-            throw new NotImplementedException();
+           _context.Packings.Update(packing);
+            _context.SaveChanges();
+            return packing;
         }
     }
 }

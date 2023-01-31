@@ -6,10 +6,10 @@ namespace HazarHospital.Interfaces.Repositories
     {
         Task<Packing>CreatePackingSpace(Packing packing);
         Task<Packing> UpdatePacking(Packing packing);
-        void RemovePacking(Packing packing);
+        Task<bool> RemovePacking(Packing packing);
         Task<Packing> GetPackingSpace(int packingId);
         Task<List<Packing>> GetAllPAcking();
-        Task<Packing> GetPackingByPackingNumber(int packingNumber);
+        Task<Packing> GetPackingByPackingNumber(string packingNumber);
         Task<List<Packing>> GetAvailablePAckingSpace();
         Task<Packing> GetFirstAvailablePAckingSpace();
 

@@ -22,19 +22,25 @@ namespace HazarHospital.Implementations.Repositories
 
         public async Task<User> FindUserByEmail(string email)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower());
+            var user = await _context.Users
+                .Include(r => r.Role)
+                .Include(p => p.Patient)
+                .Include(d => d.Doctor)
+                .FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower());
             return user;
 
         }
 
-        public Task<User> FindUserById(int id)
+        public async Task<User> FindUserById(int id)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+            return user;
         }
 
-        public List<User> GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
-            throw new NotImplementedException();
+           var users = await _context.Users.ToListAsync();
+            return users;
         }
 
         public async Task<User> RegisterUser(User user)
@@ -44,9 +50,11 @@ namespace HazarHospital.Implementations.Repositories
             return user;
         }
 
-        public Task<User> UpdateUser(User user)
+        public async Task<User> UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            _context.Users.Update(user);
+            _context.SaveChanges();
+            return user;
         }
     }
 }

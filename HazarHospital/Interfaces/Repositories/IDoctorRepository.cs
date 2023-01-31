@@ -10,7 +10,7 @@ namespace HazarHospital.Interfaces.Repositories
         Task<bool> DeleteDoctor(Doctor doctor);
         Task<Doctor> UpdateDoctor(Doctor doctor);
         Task<List<Doctor>> GetAllDoctors();
-        Task<Doctor> Exist(string email);
+        Task<bool> Exist(string email);
         Task<bool> CheckAnyAvailableDoctor();
         Task<List<Doctor>> GetDoctorsByDailyHoursOFWork(DateTime dateTime);
         Task<List<Doctor>> GetDoctorsByProffesion(string doctorProffesion);

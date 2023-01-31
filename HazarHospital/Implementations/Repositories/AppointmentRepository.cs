@@ -35,38 +35,49 @@ namespace HazarHospital.Implementations.Repositories
 
         public async Task<IList<Appointment>> GetAllAppoinmentsByDoctor(int doctorId)
         {
-           var appointments = await _context.Appointments.Where(d => d.Id == doctorId).ToListAsync();
+           var appointments = await _context.Appointments.Where(a => a.Id == doctorId).ToListAsync();
             return appointments;
         }
 
-        public Task<IList<Appointment>> GetAllAppoinmentsByPatient(int patientId)
+        public async Task<IList<Appointment>> GetAllAppoinmentsByPatient(int patientId)
         {
-            throw new NotImplementedException();
+            var appointments = await _context.Appointments.Where(a => a.Id == patientId).ToListAsync();
+            return appointments;
         }
 
-        public Task<Appointment> GetAppointment(int id)
+        public async Task<Appointment> GetAppointment(int id)
         {
-            throw new NotImplementedException();
+           var appointment = await _context.Appointments.SingleOrDefaultAsync(a => a.Id == id);
+            return appointment;
         }
 
-        public Task<Appointment> GetAppointmentByDoctorByDate(int doctorId, DateTime date)
+        public async Task<Appointment> GetAppointmentByDoctorByDate(int doctorId, DateTime date)
         {
-            throw new NotImplementedException();
+            var appointment = await _context.Appointments
+                .Include(d => d.Doctor)
+                .ThenInclude(d => d.Appointments)
+                .Include(a => a.AppointmentDate)
+                .SingleOrDefaultAsync(a => a.DoctorId == doctorId && a.AppointmentDate == date);
+            return appointment;
         }
 
-        public Task<Appointment> GetAppointmentByReferenceNumber(string referenceNumber)
+        public async Task<Appointment> GetAppointmentByReferenceNumber(string referenceNumber)
         {
-            throw new NotImplementedException();
+            var appointment = await _context.Appointments.SingleOrDefaultAsync(a => a.AppointmentReferenceNumber == referenceNumber);
+            return appointment;
         }
 
-        public Task<bool> GetDoctorAvailability(int doctorId, DateTime date)
+        public async Task<bool> GetDoctorAvailability(int doctorId, DateTime date)
         {
-            throw new NotImplementedException();
+            var availableDoctor = await _context.Appointments.AnyAsync(a => a.Id == doctorId && a.AppointmentDate == date);
+            return availableDoctor;
         }
 
-        public Task<Appointment> Update(Appointment appointment)
+        public async Task<Appointment> Update(Appointment appointment)
         {
-            throw new NotImplementedException();
+            _context.Appointments.Update(appointment);
+            _context.SaveChanges();
+            return appointment;
         }
     }
 }
