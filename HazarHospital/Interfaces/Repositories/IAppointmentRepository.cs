@@ -13,5 +13,6 @@ namespace HazarHospital.Interfaces.Repositories
         Task<Appointment> GetAppointmentByReferenceNumber(string referenceNumber);
         Task<Appointment> GetAppointmentByDoctorByDate(int doctorId, DateTime date);
         Task<bool> GetDoctorAvailability(int doctorId, DateTime date);
+        Task<int> GetAppointmentCount();
     }
 }

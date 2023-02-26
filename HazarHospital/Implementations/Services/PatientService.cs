@@ -56,7 +56,7 @@ namespace HazarHospital.Implementations.Services
             }
             var role = await _roleRepository.FindRoleByName("Patient");
             var salt = Guid.NewGuid().ToString();
-            var hashPassword = BCrypt.Net.BCrypt.HashPassword($"{model.password}{salt}");
+            var hashPassword = BCrypt.Net.BCrypt.HashPassword($"{model.password}");
             var user = new User
             {
                 Email = model.Email,

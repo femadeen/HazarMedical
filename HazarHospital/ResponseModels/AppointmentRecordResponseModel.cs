@@ -1,6 +1,10 @@
-﻿namespace HazarHospital.ResponseModels
+﻿using HazarHospital.Models;
+
+namespace HazarHospital.ResponseModels
 {
-    public class AppointmentRecordResponseModel
+    public class AppointmentRecordResponseModel : BaseResponse
     {
+        public int ? AppointmentId { get; set; }
+        public string DoctorComment { get; set; }
     }
 }

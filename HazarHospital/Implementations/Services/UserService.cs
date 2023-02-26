@@ -53,10 +53,10 @@ namespace HazarHospital.Implementations.Services
                     Message = "No Such User Exist"
                 };
             }
-            var passwordCheck = BCrypt.Net.BCrypt.Verify(model.Passwrord, user.PasswordHash);
+            var passwordCheck = BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash);
             if(passwordCheck)
             {
-                if(user.Role.Name == "Patient")
+                if(user.Role.Name == "patient")
                 {
                     return new UserResponseModel
                     {
@@ -73,7 +73,7 @@ namespace HazarHospital.Implementations.Services
                         Message = "Patient Successfully login"
                     };
                 }
-                else
+                else if(user.Role.Name == "doctor")
                 {
                     return new UserResponseModel
                     {
@@ -90,6 +90,24 @@ namespace HazarHospital.Implementations.Services
                         Message = "Doctor Successfully login"
                     };
                 }
+                else
+                {
+                    return new UserResponseModel
+                    {
+                        Data = new UserDto
+                        {
+                            Id = user.Id,
+                            FirstName = user.Admin.FirstName,
+                            LastName = user.Admin.LastName,
+                            Email = user.Admin.Email,
+                            RoleId = user.Role.Id,
+                            RoleName = user.Role.Name
+                        },
+                        Status = true,
+                        Message = "Admin login Successfully"
+                    };
+                }
+                
             }
             return new UserResponseModel
             {

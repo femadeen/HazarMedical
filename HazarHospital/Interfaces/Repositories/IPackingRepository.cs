@@ -12,6 +12,6 @@ namespace HazarHospital.Interfaces.Repositories
         Task<Packing> GetPackingByPackingNumber(string packingNumber);
         Task<List<Packing>> GetAvailablePAckingSpace();
         Task<Packing> GetFirstAvailablePAckingSpace();
-
+        Task<int> GetParkingCount();
     }
 }

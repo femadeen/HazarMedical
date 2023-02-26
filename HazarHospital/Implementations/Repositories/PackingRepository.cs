@@ -50,6 +50,12 @@ namespace HazarHospital.Implementations.Repositories
             return packingSpace;
         }
 
+        public async Task<int> GetParkingCount()
+        {
+            var parkingCount = await _context.Packings.CountAsync();
+            return parkingCount;    
+        }
+
         public async Task<bool> RemovePacking(Packing packing)
         {
             var PackingToDelete = _context.Packings.Remove(packing);

@@ -14,5 +14,6 @@ namespace HazarHospital.Interfaces.Repositories
         Task<bool> CheckAnyAvailableDoctor();
         Task<List<Doctor>> GetDoctorsByDailyHoursOFWork(DateTime dateTime);
         Task<List<Doctor>> GetDoctorsByProffesion(string doctorProffesion);
+        Task<int> GetDoctorCount();
     }
 }

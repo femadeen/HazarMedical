@@ -26,6 +26,7 @@ namespace HazarHospital.Implementations.Repositories
                 .Include(r => r.Role)
                 .Include(p => p.Patient)
                 .Include(d => d.Doctor)
+                .Include(a => a.Admin)
                 .FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower());
             return user;
 

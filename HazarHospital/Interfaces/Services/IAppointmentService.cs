@@ -9,10 +9,11 @@ namespace HazarHospital.Interfaces.Services
     {
         Task<BaseResponse> MakeAppointment(AppointmentBookingRequestModel request);
         Task<BaseResponse> ApprovedAppointment(int appointmentId);
-        Task<BaseResponse> SubmitAppointmentRecord(string comment, int appointmentId);
+        Task<AppointmentRecordResponseModel> SubmitAppointmentRecord(string comment, int appointmentId);
         Task<AppointmentResponseModel> AppointmentConfimationNumber(Appointment Apppointment);
         Task<AppointmentResponseModel> CancelUnappovedAppointment(CancelBookedAppointmentRequestModel model);
         Task<BaseResponse> RecommendAppointmentByDoctor(AppointmentBookingRequestModel request);
         Task<BaseResponse> RequestToCancelApprovedAppointment(CancelBookedAppointmentRequestModel model);
+        Task<AppointmentsResponseModel> GetAllAppointments();
     }
 }

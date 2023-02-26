@@ -42,3 +42,8 @@ C:\Users\HP\Documents\HazarHospital\HazarHospital\bin\Debug\net6.0\Microsoft.Ide
 C:\Users\HP\Documents\HazarHospital\HazarHospital\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\HP\Documents\HazarHospital\HazarHospital\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\HP\Documents\HazarHospital\HazarHospital\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\HP\Documents\HazarHospital\HazarHospital\bin\Debug\net6.0\FubarCoder.RestSharp.Portable.Core.dll
+C:\Users\HP\Documents\HazarHospital\HazarHospital\bin\Debug\net6.0\FubarCoder.RestSharp.Portable.HttpClient.dll
+C:\Users\HP\Documents\HazarHospital\HazarHospital\bin\Debug\net6.0\JsonSubTypes.dll
+C:\Users\HP\Documents\HazarHospital\HazarHospital\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\HP\Documents\HazarHospital\HazarHospital\bin\Debug\net6.0\sib_api_v3_sdk.dll

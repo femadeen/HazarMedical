@@ -50,6 +50,11 @@ namespace HazarHospital.Implementations.Repositories
             return doctors;
         }
 
+        public async Task<int> GetDoctorCount()
+        {
+            var doctorCount = await _context.Doctors.CountAsync();
+            return doctorCount;
+        }
 
         public async Task<List<Doctor>> GetDoctorsByDailyHoursOFWork(DateTime datetime)
         {

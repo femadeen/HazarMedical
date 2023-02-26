@@ -35,16 +35,16 @@ namespace HazarHospital.Implementations.Services
         public async Task<DoctorsResponseModel> GetAllDoctors()
         {
             var doctors = await _doctorRepository.GetAllDoctors();
-            var retrunDoctors = doctors.Select(d => new DoctorDto
+            var returnedDoctors = doctors.Select(d => new DoctorDto
             {
                 FirstName = d.FirstName,
                 LastName = d.LastName,
                 Email = d.Email,
                 DoctorProfession = d.DoctorProffession
-            });
+            }).ToList();
             return new DoctorsResponseModel
             {
-                Data = retrunDoctors,
+                Data = returnedDoctors,
                 Status = true,
                 Message = "All doctors retreived successfully"
             };

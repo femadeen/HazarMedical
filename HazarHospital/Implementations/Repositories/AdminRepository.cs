@@ -20,10 +20,9 @@ namespace HazarHospital.Implementations.Repositories
             return true;
         }
 
-        public async Task<bool> Exist(string firstName, string lastname)
+        public async Task<bool> Exist(string email)
         {
-            var admin = await _context.Admins.AnyAsync(a => a.FirstName.ToLower()
-            == firstName.ToLower() && a.LastName.ToLower() == lastname.ToLower());
+            var admin = await _context.Admins.AnyAsync(a => a.Email == email);
             return admin;
         }
 

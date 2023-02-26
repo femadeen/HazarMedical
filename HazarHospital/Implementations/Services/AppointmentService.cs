@@ -1,4 +1,5 @@
-﻿using HazarHospital.Entities;
+﻿using HazarHospital.DTOs;
+using HazarHospital.Entities;
 using HazarHospital.Implementations.Repositories;
 using HazarHospital.Interfaces.Repositories;
 using HazarHospital.Interfaces.Services;
@@ -32,6 +33,11 @@ namespace HazarHospital.Implementations.Services
         }
 
         public Task<AppointmentResponseModel> CancelUnappovedAppointment(CancelBookedAppointmentRequestModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<AppointmentsResponseModel> GetAllAppointments()
         {
             throw new NotImplementedException();
         }
@@ -131,9 +137,32 @@ namespace HazarHospital.Implementations.Services
             throw new NotImplementedException();
         }
 
-        public Task<BaseResponse> SubmitAppointmentRecord(string comment, int appointmentId)
+        public async Task<AppointmentRecordResponseModel> SubmitAppointmentRecord(string comment, int appointmentId)
         {
-            throw new NotImplementedException();
+            var appointment = await _appointmentRepository.GetAppointment(appointmentId); 
+            if(appointment == null)
+            {
+                return new AppointmentRecordResponseModel
+                {
+                    Status = false,
+                    Message = "No such appointment exist"
+                };
+            }
+            if(appointment.Status == Enums.AppointmentStatus.Completed)
+            {
+                return new AppointmentRecordResponseModel
+                {
+                    AppointmentId = appointmentId,
+                    DoctorComment = comment,
+                    Status = true,
+                    Message = "Doctor's comment submitted"
+                };
+            }
+            return new AppointmentRecordResponseModel
+            {
+               Status = false,
+               Message = " Treatment not yet complete"
+            };
         }
     }
 }

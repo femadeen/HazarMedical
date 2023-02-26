@@ -18,7 +18,7 @@ namespace HazarHospital.Implementations.Services
         {
             var role = new Role
             {
-                Name = model.RoleName
+                Name = model.RoleName.ToLower(),
             };
             await _roleRepository.RegisterRole(role);
             return new BaseResponse

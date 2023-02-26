@@ -67,12 +67,17 @@ namespace HazarHospital.Implementations.Repositories
             return appointment;
         }
 
+        public async Task<int> GetAppointmentCount()
+        {
+            var appointmentCount = await _context.Appointments.CountAsync();
+            return appointmentCount;
+        }
+
         public async Task<bool> GetDoctorAvailability(int doctorId, DateTime date)
         {
             var availableDoctor = await _context.Appointments.AnyAsync(a => a.Id == doctorId && a.AppointmentDate == date);
             return availableDoctor;
         }
-
         public async Task<Appointment> Update(Appointment appointment)
         {
             _context.Appointments.Update(appointment);

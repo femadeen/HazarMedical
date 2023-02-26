@@ -51,6 +51,12 @@ namespace HazarHospital.Implementations.Repositories
             return patient;
         }
 
+        public async Task<int> GetPatientCount()
+        {
+            var patientCount = await _context.Patients.CountAsync();
+            return patientCount;
+        }
+
         public async Task<Patient> RegisterPatient(Patient patient)
         {
             await _context.Patients.AddAsync(patient);

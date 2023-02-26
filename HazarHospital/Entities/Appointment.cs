@@ -21,5 +21,6 @@ namespace HazarHospital.Entities
         public DateTime DateCreated { get; set; }
         public AppointmentStatus Status { get; set; }
         public int? DoctorId { get; set; }
+        public int appointmentReminderId { get; set; }
     }
 }

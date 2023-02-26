@@ -8,9 +8,7 @@ namespace HazarHospital.Interfaces.Repositories
         Task<Patient> FindPatientById(int id);
         Task<Patient> FindpatientByEmail(string email);
         Task<bool> DeletePatient(Patient patient);
-        Task<List<Patient>> GetAllPatients();
         Task<bool> Exist(string email);
-        Task<Patient> UpdatePatient(Patient patient);
-        Task<Patient> GetPatientByPatientCode(string patientCode);
+        Task<int> GetPatientCount();
     }
 }

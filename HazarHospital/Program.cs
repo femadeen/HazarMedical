@@ -42,6 +42,7 @@ builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 var key = "This is an authorization key";
 builder.Services.AddSingleton<IJwtAuthentication>(new JwtAuthentication(key));
 
+
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
