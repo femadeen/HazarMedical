@@ -3,6 +3,7 @@ using System;
 using HazarHospital.HospitalContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HazarHospital.Migrations
 {
     [DbContext(typeof(HazarHospitalDbContext))]
-    partial class HazarHospitalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230226172029_backgroudTAskAdded")]
+    partial class backgroudTAskAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -31,9 +31,9 @@ namespace HazarHospital.AppointmentReminder
                 var appointmentDate = DateTime.Parse(appointmentSchedule);
                 var stringNowDate = DateTime.Now.ToString().Split(" ")[0];
                 var dateNow = DateTime.Parse(stringNowDate);
-                var appointmentMonth = (appointmentDate.Month + (appointmentDate.Year * 12));
-                var nowMonths = (dateNow.Month + (dateNow.Year * 12));
-                if (nowMonths - appointmentMonth == 3)
+                /*var appointmentMonth = (appointmentDate.Month + (appointmentDate.Year * 12));
+                var nowMonths = (dateNow.Month + (dateNow.Year * 12));*/
+                if (dateNow.Day - appointmentDate.Day <= 3)
                 {
                     var reminderEmail = new EmailRequest
                     {
