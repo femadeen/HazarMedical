@@ -1,4 +1,5 @@
-﻿using HazarHospital.Entities;
+﻿using HazarHospital.EmailSender;
+using HazarHospital.Entities;
 using HazarHospital.Interfaces.Repositories;
 using HazarHospital.Interfaces.Services;
 using HazarHospital.Models;
@@ -12,11 +13,13 @@ namespace HazarHospital.Implementations.Services
         private readonly IPatientRepository _patientRepository;
         private readonly IUserRepository _userRepository;
         private readonly IRoleRepository _roleRepository;
-        public PatientService(IPatientRepository patientRepository, IUserRepository userRepository, IRoleRepository roleRepository)
+        private readonly IEmailSender _sender;
+        public PatientService(IPatientRepository patientRepository, IUserRepository userRepository, IRoleRepository roleRepository, IEmailSender sender)
         {
             _patientRepository = patientRepository;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
+            _sender = sender;
         }
 
         public Task<PatientResponseModel> DeletePatient(int patientId)
@@ -78,6 +81,14 @@ namespace HazarHospital.Implementations.Services
             };
             await _userRepository.RegisterUser(user);
             await _patientRepository.RegisterPatient(patient);
+            var welcomeMail = new EmailRequest
+            {
+                ReceiverEmailAdrress = model.Email,
+                ReceiverName = $"{model.FirstName} {model.LastName}",
+                Message = "Welcome To Hazar Hospital where your health is assured",
+                Subject = "Welcome Message"
+            };
+            await _sender.SendEmail(welcomeMail);
             return new BaseResponse
             {
                 Status = true,

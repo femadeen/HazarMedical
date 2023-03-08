@@ -29,7 +29,7 @@ namespace HazarHospital.Implementations.Repositories
 
         public async Task<IList<Appointment>> GetAllAppoinments()
         {
-            var appointments = await _context.Appointments.ToListAsync();
+            var appointments = await _context.Appointments.Include(p => p.Patient).ToListAsync();
             return appointments;
         }
 

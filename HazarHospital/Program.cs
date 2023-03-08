@@ -1,4 +1,8 @@
+using HazarHospital;
+using HazarHospital.AppointmentReminder;
 using HazarHospital.Authentication;
+using HazarHospital.BackgroundJobs;
+using HazarHospital.EmailSender;
 using HazarHospital.HospitalContext;
 using HazarHospital.Implementations.Repositories;
 using HazarHospital.Implementations.Services;
@@ -8,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using sib_api_v3_sdk.Client;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +44,11 @@ builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddHostedService<EmailBackgroundService>();
+builder.Services.Configure<CroneConfiguration>(builder.Configuration.GetSection("EmailSenderConfig"));
+builder.Services.AddScoped<IAppointmentReminderService,AppointmentReminderService>();
+builder.Services.AddHttpContextAccessor();
 var key = "This is an authorization key";
 builder.Services.AddSingleton<IJwtAuthentication>(new JwtAuthentication(key));
 

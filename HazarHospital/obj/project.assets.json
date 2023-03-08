@@ -511,6 +511,19 @@
           }
         }
       },
+      "NCrontab.Signed/3.3.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/NCrontab.Signed.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/NCrontab.Signed.dll": {
+            "related": ".pdb"
+          }
+        }
+      },
       "NETStandard.Library/1.6.1": {
         "type": "package",
         "dependencies": {
@@ -2993,6 +3006,24 @@
         "logo.png",
         "mysqlconnector.2.1.2.nupkg.sha512",
         "mysqlconnector.nuspec"
+      ]
+    },
+    "NCrontab.Signed/3.3.2": {
+      "sha512": "Ef9nJs/iIkM3hAcAEDD5dZy0cDFfmmPlhRAt/IPYcsWdMUHZ6MQLuqv5oA6TZrpvO6Sj8lq/B5njbJUMnxedLg==",
+      "type": "package",
+      "path": "ncrontab.signed/3.3.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "COPYING.txt",
+        "lib/net35/NCrontab.Signed.dll",
+        "lib/net35/NCrontab.Signed.pdb",
+        "lib/netstandard1.0/NCrontab.Signed.dll",
+        "lib/netstandard1.0/NCrontab.Signed.pdb",
+        "lib/netstandard2.0/NCrontab.Signed.dll",
+        "lib/netstandard2.0/NCrontab.Signed.pdb",
+        "ncrontab.signed.3.3.2.nupkg.sha512",
+        "ncrontab.signed.nuspec"
       ]
     },
     "NETStandard.Library/1.6.1": {
@@ -7098,6 +7129,7 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.13",
       "Microsoft.EntityFrameworkCore >= 6.0.11",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.11",
+      "NCrontab.Signed >= 3.3.2",
       "Pomelo.EntityFrameworkCore.MySql >= 6.0.2",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "sib_api_v3_sdk >= 3.3.0"
@@ -7159,6 +7191,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[6.0.11, )"
+          },
+          "NCrontab.Signed": {
+            "target": "Package",
+            "version": "[3.3.2, )"
           },
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",

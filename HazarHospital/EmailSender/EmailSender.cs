@@ -5,16 +5,20 @@ using System;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using HazarHospital.EmailSender;
+using System.Reflection.Metadata.Ecma335;
+
 namespace HazarHospital.EmailSender
 {
     public class EmailSender : IEmailSender
     {
         public async Task<bool> SendEmail(EmailRequest model)
         {
-            Configuration.Default.ApiKey.Add("api-key", "xsmtpsib-7d7870f8f5fb84f15b2cfcc2a30ff0fa402f3934e99b8b3d8e728c70ed29a191-fmOjh2RxptvGFTH0");
+            Configuration.Default.ApiKey.Clear();
+            Configuration.Default.ApiKey.Add("api-key", "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");
 
             var apiInstance = new TransactionalEmailsApi();
-            string SenderName = "HAZAR HOSPITAL";
+            string SenderName = "Hazar Hospital";
             string SenderEmail = "femadeen@gmail.com";
             SendSmtpEmailSender Email = new SendSmtpEmailSender(SenderName, SenderEmail);
             string ToEmail = model.ReceiverEmailAdrress;
@@ -35,8 +39,8 @@ namespace HazarHospital.EmailSender
             string HtmlContent = $"<html><body><h1>{model.Message}</h1></body></html>";
             string TextContent = null;
             string Subject = model.Subject;
-            string ReplyToName = "Apartment Rent Management System";
-            string ReplyToEmail = "ajibikeabdulqayyum04@gmail.com";
+            string ReplyToName = "Hazar Hospita";
+            string ReplyToEmail = "femadeen@gmail.com";
             SendSmtpEmailReplyTo ReplyTo = new SendSmtpEmailReplyTo(ReplyToEmail, ReplyToName);
             string AttachmentUrl = null;
             string stringInBase64 = "aGVsbG8gdGhpcyBpcyB0ZXN0";
@@ -56,18 +60,27 @@ namespace HazarHospital.EmailSender
             SendSmtpEmailTo1 smtpEmailTo1 = new SendSmtpEmailTo1(ToEmail, ToName);
             List<SendSmtpEmailTo1> To1 = new List<SendSmtpEmailTo1>();
             To1.Add(smtpEmailTo1);
-            var g = Guid.NewGuid().ToString();
             Dictionary<string, object> _parmas = new Dictionary<string, object>();
-            _parmas.Add(g, Params);
+            _parmas.Add("params", Params);
             SendSmtpEmailReplyTo1 ReplyTo1 = new SendSmtpEmailReplyTo1(ReplyToEmail, ReplyToName);
             SendSmtpEmailMessageVersions messageVersion = new SendSmtpEmailMessageVersions(To1, _parmas, Bcc, Cc, ReplyTo1, Subject);
             List<SendSmtpEmailMessageVersions> messageVersiopns = new List<SendSmtpEmailMessageVersions>();
             messageVersiopns.Add(messageVersion);
-
-            var sendSmtpEmail = new SendSmtpEmail(Email, To, Bcc, Cc, HtmlContent, TextContent, Subject, ReplyTo, Attachment, Headers, TemplateId, Params, messageVersiopns, Tags);
-            CreateSmtpEmail result = apiInstance.SendTransacEmail(sendSmtpEmail);
-            Configuration.Default.ApiKey.Clear();
+            try
+            {
+                var sendSmtpEmail = new SendSmtpEmail(Email, To, Bcc, Cc, HtmlContent, TextContent, Subject, ReplyTo, Attachment, Headers, TemplateId, Params, messageVersiopns, Tags);
+                CreateSmtpEmail result = apiInstance.SendTransacEmail(sendSmtpEmail);
+                
+            }
+            catch (Exception e)
+            {
+                
+                Console.WriteLine(e.Message);
+                Console.ReadLine();
+            }
             return true;
         }
+        
+        
     }
 }

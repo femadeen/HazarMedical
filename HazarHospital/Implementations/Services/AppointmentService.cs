@@ -37,9 +37,25 @@ namespace HazarHospital.Implementations.Services
             throw new NotImplementedException();
         }
 
-        public Task<AppointmentsResponseModel> GetAllAppointments()
+        public async Task<AppointmentsResponseModel> GetAllAppointments()
         {
-            throw new NotImplementedException();
+            var appointments = await _appointmentRepository.GetAllAppoinments();
+            var selectedAppointments = appointments.Select(a => new AppointmentDto
+            {
+                FirstName = a.Patient.FirstName,
+                LastName = a.Patient.LastName,
+                email = a.Patient.Email,
+                AppointmentDate = a.AppointmentDate,
+                AppointmentReason = a.AppointmentReason,
+                PatientId = a.PatientId,
+            }).ToList();
+            return new AppointmentsResponseModel
+            {
+                Data = selectedAppointments,
+                Status = true,
+                Message = "List of Booked Appointments display" 
+            };
+            
         }
 
         public async Task<BaseResponse> MakeAppointment(AppointmentBookingRequestModel request)

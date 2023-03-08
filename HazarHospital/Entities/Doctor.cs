@@ -11,6 +11,6 @@ namespace HazarHospital.Entities
         public LabResult LabResult { get; set; }
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
         public bool IsAvailable { get; set; }
-        public int appointmentReminderId { get; set; }
+        /*public int appointmentReminderId { get; set; }*/
     }
 }

@@ -37,9 +37,11 @@ namespace HazarHospital.AppointmentReminder
                 {
                     var reminderEmail = new EmailRequest
                     {
+                        AppointmentId = singleAppointment.PatientId,
                         ReceiverName = $"{singleAppointment.Patient.LastName} {singleAppointment.Patient.FirstName}",
                         ReceiverEmailAdrress = singleAppointment.Patient.Email,
-                        Message = "This is to remind you of your appointment with hazar hospital in next three days"
+                        Subject = "Appointment Reminder",
+                        Message = "This is to remind you of your appointment with hazar hospital"
                     };
                     await _emailSender.SendEmail(reminderEmail);
                 } 
